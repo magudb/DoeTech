@@ -12,37 +12,84 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="{{asset "favicon.ico"}}">
-
     {{! Styles'n'Scripts }}
-    <link rel="stylesheet" type="text/css" href="{{asset "css/screen.css"}}" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- CSS, Normalize First, minify for production -->
+    
+
+    <!-- Import web fonts using the link tag instead of CSS @import -->
+    <link href="//fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
+
+    <!-- Icons from http://fontawesome.io/ -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <link href="{{asset "/css/fore.css"}}" rel="stylesheet">
 
     {{! Ghost outputs important style and meta data with this tag }}
     {{ghost_head}}
 </head>
 <body class="{{body_class}} nav-closed">
 
-    {{navigation}}
+{{! The tag above means - insert everything in this file into the {body} of the default.hbs template }}
 
-    <div class="site-wrapper">
+{{! The big featured header }}
 
-        {{! Everything else gets inserted here }}
-        {{{body}}}
+ <header id="main-header">
+            <div class="container" style="background-image: url({{@blog.cover}})">
+                <h1>{{@blog.title}}</h1>
+                <p>{{@blog.description}}</p>
+            </div>
+        </header>
+       {{navigation}}
 
-        <footer class="site-footer clearfix">
-            <section class="copyright"><a href="{{@blog.url}}">{{@blog.title}}</a> &copy; {{date format="YYYY"}}</section>
-            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
-        </footer>
+    {{! Everything else gets inserted here }}
+    {{{body}}}
 
-    </div>
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-boat">
+               
+            </div>
+            <div id="footer-text" class="small">
+                <p>&copy; DOE ApS | Design by <a href="http://www.eatablueberry.com" target="_blank">Blueberry</a></p>
+            </div>
+        </div>
+    </footer>
 
     {{! Ghost outputs important scripts and data with this tag }}
     {{ghost_foot}}
 
-    {{! The main JavaScript file for Casper }}
-    <script type="text/javascript" src="{{asset "js/jquery.fitvids.js"}}"></script>
-    <script type="text/javascript" src="{{asset "js/index.js"}}"></script>
+
+    <!-- Reference jQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <!-- Reference Javascript, minified for production -->
+    <script src="{{asset "/js/fore.min.js"}}"></script>
+
+    <!-- Unslider script -->
+    <script>
+        $(document).ready(function () {
+            var unslider = $('.slider').unslider();
+            $('.unslider-arrow').click(function(event) {
+                event.preventDefault();
+                if ($(this).hasClass('next')) {
+                    unslider.data('unslider')['next']();  
+                } else {
+                    unslider.data('unslider')['prev']();  
+                };
+            });
+            var unslider = $('.slider').unslider();
+
+            unslider.on('movestart', function(e) {
+                if((e.distX > e.distY && e.distX < -e.distY) || (e.distX < e.distY &&   e.distX > -e.distY)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

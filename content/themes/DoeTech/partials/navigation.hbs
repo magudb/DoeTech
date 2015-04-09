@@ -1,13 +1,28 @@
-        <div class="nav">
-            <h3 class="nav-title">Menu</h3>
-            <a href="#" class="nav-close">
-                <span class="hidden">Close</span>
-            </a>
-            <ul>
-                {{#foreach navigation}}
-                <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}" role="presentation"><a href="{{url absolute="true"}}"></a></li>
-                {{/foreach}}
-            </ul>
-            <a class="subscribe-button icon-feed" href="{{@blog.url}}/rss/">Subscribe</a>
-        </div>
-        <span class="nav-cover"></span>
+
+ <section id="list">
+            <div class="container">
+                <header class="body-header">
+                    <h2>Efficiently unleash cross-media.</h2>
+                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</p>
+                </header>
+                <article>
+                    <div class="list-row cf">
+                         {{#foreach navigation}}
+
+                          <div class="list-item">
+                            <a href="{{url absolute="true"}}">
+                                <i class="fa fa-bullhorn fa-2x"></i>
+                                <h3>{{label}}</h3>
+                            </a>
+                        </div>
+
+                      
+                        {{/foreach}}
+
+
+                     
+                    </div>
+                 
+                </article>
+            </div>
+        </section>

@@ -19,13 +19,13 @@ config = {
             },
             debug: false
         },
-
         server: {
             // Host to be passed to node's `net.Server#listen()`
             host: '127.0.0.1',
             // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
-            port: '2368'
-        }
+            port: process.env.PORT
+        },
+        forceAdminSSL: false // causes a redirect-loop on azure, use urlrewrite instead
     },
 
     // ### Development **(default)**
